@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Firebet;
 import Model.Marine;
 
 public class Controller {
@@ -8,8 +9,13 @@ public class Controller {
 		// TODO Auto-generated method stub
 
 		Marine marine = new Marine();
-		marine.inform();
+		//marine.inform();
+		Firebet firebet = new Firebet();
 		
+		firebet.setHp(marine.attack(firebet));
+		firebet.setHp(marine.attack(firebet));
+		firebet.setHp(marine.attack(firebet));
+		//marine.inform();
 	}
 
 }
