@@ -6,6 +6,12 @@ public class Unit {
 	protected int attack;	//공격력
 	protected String name;
 	
+	public Unit(int hp, int attack, String name) {
+		this.hp = hp;
+		this.attack = attack;
+		this.name = name;
+	}
+	
 	public int getHp() {
 		return hp;
 	}
@@ -24,26 +30,25 @@ public class Unit {
 	}
 
 	public void inform() {
-		System.out.println(hp);
+		System.out.println(this.name + " 현재 HP는 " + this.hp + "입니다.");
+		System.out.println();
 	}
 	
-	public Unit(int hp, int attack, String name) {
-		this.hp = hp;
-		this.attack = attack;
-		this.name = name;
-	}
-	
-	public int attack(Unit unit) {
-		this.hp = unit.hp - unit.attack;
-
-		if(this.hp > 0){
-			System.out.println(unit.name + "이 공격당했습니다. 현재 hp : " + this.hp);
-			return this.hp;
-		}else{
-			System.out.println(unit.name +" die.");
-			return 0;
-		}
+	public void attack(Unit unit) {
 		
+		if(unit.hp == 0){
+			System.out.println(unit.name + "을 더이상 공격할 수 없습니다.");
+		}else {
+			System.out.println(this.name + "이 " + unit.name + "을 공격했습니다.");
+			unit.hp = unit.hp - this.attack;
+			if(unit.hp <= 0){
+				System.out.println(unit.name +" die.");
+				System.out.println();
+				unit.hp = 0;
+				return;
+			}
+		}
+		unit.inform();
 	}
 	
 }

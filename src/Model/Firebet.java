@@ -2,8 +2,8 @@ package Model;
 
 public class Firebet extends Unit{
 
-	public Firebet() {
-		super(100, 40, "Firebet");
+	public Firebet(String name) {
+		super(100, 70, name);
 	}
 	
 }
