@@ -6,10 +6,15 @@ public class Unit {
 	protected int attack;	//°ø°Ý·Â
 	protected String name;
 	
+	protected int x;
+	protected int y;
+	
 	public Unit(int hp, int attack, String name) {
 		this.hp = hp;
 		this.attack = attack;
 		this.name = name;
+		this.x = 0;
+		this.y = 0;
 	}
 	
 	public int getHp() {
@@ -27,6 +32,22 @@ public class Unit {
 
 	public void setAttack(int attack) {
 		this.attack = attack;
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public void inform() {
@@ -51,4 +72,13 @@ public class Unit {
 		unit.inform();
 	}
 	
+	public void Move(Unit unit, String xy) {
+		
+		int x = xy.indexOf(',', 1);
+		int y = xy.indexOf(',', 2);
+		
+		System.out.println("X : " + x + "Y : " + y);
+		
+	}
+
 }
