@@ -19,6 +19,8 @@ public class Location {
 		return x;
 	}
 	public void setX(int x) {
+		System.out.println("X : "  + this.x);
+		System.out.println("X : "  + x);
 		this.x = x;
 	}
 	public int getY() {
