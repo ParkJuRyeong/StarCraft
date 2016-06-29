@@ -25,7 +25,7 @@ public class Marine extends Unit{
 			this.exp -= 100;
 			System.out.println("[" + this.name +"]" + " Level " + this.level + " Upgrade" );
 			this.attack += 5;
-			this.hp = 55;
+			this.hp = 55; 
 			return true;
 		}
 		
