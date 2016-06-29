@@ -181,7 +181,7 @@ public class Controller {
 							attackUnitIdx = attackUnitList.indexOf(unit);
 						}
 					}
-					unitList.get(selectedUnitIdx).attack(attackUnitList.get(attackUnitIdx));
+					unitList.get(selectedUnitIdx).unitAttack(attackUnitList.get(attackUnitIdx));
 				}
 				break;
 			case 2 :
@@ -192,7 +192,7 @@ public class Controller {
 				int y = scanner.nextInt();
 				
 				Unit unit = unitList.get(selectedUnitIdx);
-				unit.moveUnit(x,y);
+				unit.move(x,y);
 				System.out.println("이동에 성공하였습니다.");
 				break;
 			default :

@@ -74,7 +74,7 @@ public class Unit {
 		//System.out.println();
 	}
 	
-	public void attack(Unit unit) {
+	public void unitAttack(Unit unit) {
 		
 		//if(unit.hp == 0){
 		//	System.out.println(unit.name + "을 더이상 공격할 수 없습니다.");
@@ -98,7 +98,7 @@ public class Unit {
 		return distance <= this.range;
 	}
 
-	public void moveUnit(int x, int y) {
+	public void move(int x, int y) {
 		this.loc.setX(this.loc.getX() + x);
 		this.loc.setY(this.loc.getY() + y);
 	}
