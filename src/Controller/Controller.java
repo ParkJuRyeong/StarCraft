@@ -79,11 +79,13 @@ public class Controller {
 					int fCount = 0;	//ÆÄÀÌ¾î¹î
 					for (Unit unit : unitList) {
 						unit.inform();
+						/*
 						if(unit.getName().startsWith("Marine")){
 							mCount++;
 						}else{
 							fCount++;
 						}
+						*/
 					}
 //					/System.out.println("ÃÑ : " + (mCount+fCount) + "¸¶¸® (" + "¸¶¸°: " + mCount +" / ÆÄÀÌ¾î¹î : " + fCount+ ")");
 				}
