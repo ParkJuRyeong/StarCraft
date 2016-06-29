@@ -109,8 +109,7 @@ public class Controller {
 					
 					if(unitSelectedNum == 0) {
 						continue;
-					}else if(!(unitSelectedNum <= unitList.size())){
-						System.out.println("잘못 입력하였습니다.");
+					}else if(!inputCheck(unitList, unitSelectedNum)){
 						continue;
 					}
 					
