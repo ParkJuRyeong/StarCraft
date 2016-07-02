@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.kyh0209.Module;
+import com.tjoeun.pjr0916.MyModule;
+
 import Model.Firebet;
 import Model.Marine;
 import Model.Unit;
+import listener.OnDiedListener;
 
 public class Controller {
 
@@ -33,6 +37,9 @@ public class Controller {
 		List<Unit> unitList = new ArrayList<Unit>();	//배열 <Marine>: 제네릭(Generics)
 		Scanner scanner = new Scanner(System.in);
 		
+		//Unit unit = new Unit(); : public abstract class Unit 설정시 유닛을 만들 수 없다. (객체 생성 못함) 
+		//상속보다 인터페이스가 좋다는게 설계적 관점
+		
 		/*
 		 * 누가 누구를 공격한다.
 		 * 이동가능
@@ -44,10 +51,17 @@ public class Controller {
 		 * 2. 0,0 에서 생성
 		 * 3. 유닛이 이동할 수 있기
 		 * 4. 유닛은 자기 사거리안에 들어온 유닛만 공격가능
+		 * 유닛이 죽으면 controller 에게 전달 해줌
 		*/
+		
 		
 		int mNum = 1;	//마린 number
 		int fNum = 1;	//파이어뱃 number
+		
+		Module m = new Module();	//jar
+		m.run();
+		MyModule m2 = new MyModule();	//프로젝트 종속성이 생김
+		m2.run();
 		
 		while (true) {
 			System.out.println("--------------------");
@@ -63,20 +77,40 @@ public class Controller {
 			switch (input){
 			case 1 :	//마린 생성
 				Marine marine = new Marine("Marine" + mNum);
-				unitList.add(marine);
 				System.out.println("Marine" + mNum + " 생성.");
 				mNum++;
+				
+				OnDiedListener onDiedListenerImplMarine = new OnDiedListener() {//익명클래스를 만들어서 새로운 객체를 생성
+					@Override
+					public void onDied(Unit diedUnit) {
+						// TODO Auto-generated method stub
+						System.out.println(diedUnit.getName()+ " die.");
+						unitList.remove(diedUnit);
+					}
+				};
+				marine.setOnDiedListener(onDiedListenerImplMarine);
+				unitList.add(marine);
 				break;
 			case 2 :	//파이어뱃 생성
 				Firebet firebet = new Firebet("Firebet" + fNum);
-				unitList.add(firebet);
 				System.out.println("Firebet" + fNum + " 생성.");
 				fNum++;
+				
+				OnDiedListener onDiedListenerImplFirebet = new OnDiedListener() {//익명클래스를 만들어서 새로운 객체를 생성
+					@Override
+					public void onDied(Unit diedUnit) {
+						// TODO Auto-generated method stub
+						System.out.println( diedUnit.getName()+ " die.");
+						unitList.remove(diedUnit);
+					}
+				};
+				firebet.setOnDiedListener(onDiedListenerImplFirebet);
+				unitList.add(firebet);
 				break;
 			case 3 :	//유닛 현황 보기
 				if(unitCheck(unitList)){
-					int mCount = 0;	//마린
-					int fCount = 0;	//파이어뱃
+					//int mCount = 0;	//마린
+					//int fCount = 0;	//파이어뱃
 					for (Unit unit : unitList) {
 						unit.inform();
 						/*
@@ -96,14 +130,14 @@ public class Controller {
 					System.out.println("유닛을 선택하세요. 취소는 0");
 					
 					for (Unit unit : unitList) {
-						if(unit.getHp() > 0){
+						//if(unit.getHp() >= 0){
 							unit.setNum(unitNum);
 							System.out.print(unitNum + " : ");
 							unit.inform();
 							unitNum++;
-						}else {
-							unit.setNum(0);
-						}
+						//}else {
+						//	unit.setNum(0);
+						//}
 					}
 					int unitSelectedNum = scanner.nextInt();	//선택한 유닛 number
 					
@@ -142,12 +176,12 @@ public class Controller {
 		switch (input){
 			case 1 :
 				List<Unit> attackUnitList = new ArrayList<Unit>();
-
+	
 				int attackUnitNum = 0;
 				Unit selectdUnit = unitList.get(selectedUnitIdx);	//선택한 유닛(공격유닛)
 			
 				for (Unit unit : unitList) {
-					if(unit.getHp() > 0){
+					//if(unit.getHp() > 0){
 						if(unitList.indexOf(unit) != selectedUnitIdx && selectdUnit.isAttackable(unit)){
 							attackUnitList.add(attackUnitNum, unit);
 							attackUnitNum++;
@@ -155,7 +189,7 @@ public class Controller {
 						}else{
 							unit.setNum(0);
 						}
-					}
+					//}
 				}
 				
 				if(attackUnitList.size() == 0){
@@ -198,7 +232,7 @@ public class Controller {
 				return;
 		}
 	}
-	
+
 	private static boolean unitCheck(List<Unit> unitList) {
 		if(unitList.size() == 0){
 			System.out.println("유닛이 없습니다.");

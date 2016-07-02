@@ -10,6 +10,11 @@ public class Location {
 		this.y = y;
 	}
 	
+	public void movePoint(int x, int y) {
+		this.x = this.x + x;
+		this.y = this.y + y;
+	}
+	
 	public double getDistnace (Location target){
 		int xDiffer = target.x - x;
 		int yDiffer = target.y - x;
