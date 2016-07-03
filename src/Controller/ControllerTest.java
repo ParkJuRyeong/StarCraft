@@ -1,5 +1,7 @@
 package Controller;
 
+import javax.management.RuntimeErrorException;
+
 import Model.FirebatTest;
 import Model.MarineTest;
 
@@ -52,8 +54,6 @@ public class ControllerTest {
 		firebat1.attack("firebat1", firebat2.attack);
 		
 		firebat1.attack("firebat1", firebat2.attack);
-		
-		
-	}
 
+	}
 }

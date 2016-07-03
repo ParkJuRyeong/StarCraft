@@ -15,12 +15,14 @@ public abstract class Unit {//추상클래스
 	protected int exp;		//경험치
 	protected int level;	//레벨
 	
+	private boolean airAttackAble;	//공중공격 가능여부
+	
 	private OnDiedListener onDiedListener;
 	
 	public abstract void bark();	
 	public abstract void upgrade();
 	
-	public Unit(int hp, int attack, String name, int range) {
+	public Unit(int hp, int attack, String name, int range, boolean airAttackAble) {
 		this.hp = hp;
 		this.attack = attack;
 		this.name = name;
@@ -28,6 +30,7 @@ public abstract class Unit {//추상클래스
 		this.loc = new Location(0, 0);
 		this.level = 1;
 		this.exp = 0;
+		this.airAttackAble = airAttackAble;
 	}
 	
 	public void inform() {
@@ -71,6 +74,14 @@ public abstract class Unit {//추상클래스
 	public boolean isAttackable(Unit target) {
 		double distance = this.loc.getDistnace(target.getLoc());
 		return distance <= this.range;
+	}
+	
+	public boolean isAirAttackable(Unit target) {
+		if(this.airAttackAble){
+			return true;	
+		}else{
+			return false;
+		}
 	}
 
 	public void move(int x, int y) {

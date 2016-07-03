@@ -3,7 +3,7 @@ package Model;
 public class Firebet extends Unit{
 
 	public Firebet(String name) {
-		super(50, 25, name, 5);
+		super(50, 25, name, 5, false);
 	}
 	
 	public void upgrade() {
